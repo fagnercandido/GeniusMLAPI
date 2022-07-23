@@ -2,10 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import numpy as np
 import pandas as pd
-
-
-ACCESS_TOKEN = ''
-
+import re
 
 class GeniusLM:
 
@@ -63,9 +60,10 @@ class GeniusSongLM:
         url = "https://genius.com" + path
         response_song = requests.get(url)
         html = BeautifulSoup(response_song.content, "lxml")
-        lyrics = html.select('div[class^="Lyrics__Container"], .song_body-lyrics p')
+        lyrics = html.select('div[class^="Lyrics__Container"]')
+        REGEX_TO_CLEAN = re.compile('<.?>|\[.?\]')
         song = ''
         for div in lyrics:
             song = song + ' '
-            song = song + div.text
+            song = song + re.sub(REGEX_TO_CLEAN, '', ' '.join([item.decode() if type(item) is Tag else item for item in div.contents]))
         return song
