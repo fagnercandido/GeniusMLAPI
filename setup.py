@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     readme = fh.read()
 
 setup(name='geniusmlapi',
-    version='0.0.11',
+    version='0.0.12',
     url='https://github.com/fagnercandido/GeniusMLAPI',
     license='MIT License',
     author='Fagner Candido',
