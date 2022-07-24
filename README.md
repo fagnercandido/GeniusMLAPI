@@ -18,3 +18,26 @@ git clone https://github.com/fagnercandido/GeniusMLAPI
 - File structure for PyPI packages
 - Setup with package informations
 - License example
+
+## Running
+```
+pip install geniusmlapi
+```
+
+And then
+
+```
+from geniusmlapi import gml
+```
+
+Finally:
+```
+genius = gml.GeniusLM(ACCESS_TOKEN)
+songs = genius.search('my search')
+dataframe = genius.get_dataframe(songs)
+dataframe.head()
+```
+
+
+
+
