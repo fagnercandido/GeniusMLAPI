@@ -63,6 +63,21 @@ class GeniusLM:
                 break
         return songs
 
+    def search_artists_id_by_name(self, value):
+        page_number = 1
+        while True:
+            genius_search_url = f"http://api.genius.com/search?q={value}&access_token={self.token}&page={page_number}"
+            response = requests.get(genius_search_url)
+            hits = response.json()['response']['hits']
+            if hits:
+                for song in hits:
+                    if song["result"]["primary_artist"]["name"].lower() == value.lower():
+                        return song["result"]["primary_artist"]["id"]
+            else:
+                break
+        return None
+
+
 class GeniusSongLM:
 
     def __init__(self, id_song, title, url, path, header_image_url, annotation_count, pyongs_count, primary_artist_id,
